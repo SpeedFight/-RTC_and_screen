@@ -44,21 +44,36 @@ void show_time_num(uint8_t hour, uint8_t minute, uint8_t second, uint8_t day, ui
 	char tmp[5];
 
 	memset(tmp, '\0', sizeof(tmp));
+	if(hour<10){
+		strcat(row1, "0");
+	}
 	strcat(row1, itoa(hour, tmp, 10));
     strcat(row1, ":");
 
 	memset(tmp, '\0', sizeof(tmp));
+	if(minute<10){
+		strcat(row1, "0");
+	}
 	strcat(row1, itoa(minute, tmp, 10));
     strcat(row1, ":");
 
 	memset(tmp, '\0', sizeof(tmp));
+	if(second<10){
+		strcat(row1, "0");
+	}
 	strcat(row1, itoa(second, tmp, 10));
 
 	memset(tmp, '\0', sizeof(tmp));
+	if(day<10){
+		strcat(row2, "0");
+	}
 	strcat(row2, itoa(day, tmp, 10));
     strcat(row2, ":");
 
 	memset(tmp, '\0', sizeof(tmp));
+	if(month<10){
+		strcat(row2, "0");
+	}
 	strcat(row2, itoa(month, tmp, 10));
     strcat(row2, ":");
 
@@ -72,4 +87,8 @@ void show_time_num(uint8_t hour, uint8_t minute, uint8_t second, uint8_t day, ui
 
 	lcd_copy();
 
+}
+
+void update_screen(){
+	show_time_num(rtc_values.hours, rtc_values.minutes, rtc_values.seconds, rtc_values.date, rtc_values.months, rtc_values.year +2017);
 }

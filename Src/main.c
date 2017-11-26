@@ -100,9 +100,10 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
   lcd_init();
-
+  rtc_get_all_time_registers();
   lcd_send_data(image, sizeof(image));
   HAL_Delay(200);
+  update_screen();
 
 
   /* USER CODE END 2 */
@@ -115,23 +116,33 @@ int main(void)
 
   /* USER CODE BEGIN 3 */
 
+	  HAL_Delay(200);
 	  if(btn_3){
-		  rtc_set_minutes(rtc_values.minutes++);
-		  show_time_num(rtc_values.hours, rtc_values.minutes, rtc_values.seconds, rtc_values.date, rtc_values.months, rtc_values.year +2017);
+			if(++rtc_values.minutes > 59){
+				rtc_values.minutes = 0;
+			}
+		  rtc_set_minutes(rtc_values.minutes);
+		  update_screen();
 		  btn_3 = 0;
 
 	  }
 
 	  if(btn_2){
-		  rtc_set_hours(rtc_values.hours++);
-		  show_time_num(rtc_values.hours, rtc_values.minutes, rtc_values.seconds, rtc_values.date, rtc_values.months, rtc_values.year +2017);
+			if(++rtc_values.hours > 23){
+				rtc_values.hours = 0;
+			}
+		  rtc_set_hours(rtc_values.hours);
+		  update_screen();
 		  btn_2 = 0;
 	  }
 
 	  if(btn_1){
-		 rtc_set_months(rtc_values.months++);
-		 show_time_num(rtc_values.hours, rtc_values.minutes, rtc_values.seconds, rtc_values.date, rtc_values.months, rtc_values.year +2017);
-		  btn_1 = 0;
+			if(++rtc_values.months > 12){
+				rtc_values.months = 1;
+			}
+		 rtc_set_months(rtc_values.months);
+		 update_screen();
+		 btn_1 = 0;
 	  }
 
 	  //HAL_Delay(1000);
