@@ -11,6 +11,8 @@
 #include "stm32f0xx_hal.h"
 #include "main.h"
 #include "stdint.h"
+#include "lcd.h"
+#include "rtc.h"
 
 volatile uint8_t btn_1, btn_2, btn_3, second_pass;
 

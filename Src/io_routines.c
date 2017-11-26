@@ -7,6 +7,7 @@
 
 #include "io_routines.h"
 
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 
 	switch(GPIO_Pin){
@@ -26,7 +27,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 				break;
 
 		case(GPIO_PIN_3):
-				second_pass++;
+				rtc_get_all_time_registers();
+			 	show_time_num(rtc_values.hours, rtc_values.minutes, rtc_values.seconds, rtc_values.date, rtc_values.months, rtc_values.year +2017);
 				break;
 	}
 }

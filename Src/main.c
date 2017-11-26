@@ -42,6 +42,7 @@
 #include "i2c.h"
 #include "spi.h"
 #include "gpio.h"
+#include "io_routines.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -100,11 +101,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   lcd_init();
 
-
   lcd_send_data(image, sizeof(image));
   HAL_Delay(200);
-
-
 
 
   /* USER CODE END 2 */
@@ -117,11 +115,28 @@ int main(void)
 
   /* USER CODE BEGIN 3 */
 
-	  HAL_Delay(1000);
-	 	  //HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
+	  if(btn_3){
+		  rtc_set_minutes(rtc_values.minutes++);
+		  show_time_num(rtc_values.hours, rtc_values.minutes, rtc_values.seconds, rtc_values.date, rtc_values.months, rtc_values.year +2017);
+		  btn_3 = 0;
 
-	 	  rtc_get_all_time_registers();
-	 	  show_time_num(rtc_values.hours, rtc_values.minutes, rtc_values.seconds, rtc_values.date, rtc_values.months, rtc_values.year);
+	  }
+
+	  if(btn_2){
+		  rtc_set_hours(rtc_values.hours++);
+		  show_time_num(rtc_values.hours, rtc_values.minutes, rtc_values.seconds, rtc_values.date, rtc_values.months, rtc_values.year +2017);
+		  btn_2 = 0;
+	  }
+
+	  if(btn_1){
+		 rtc_set_months(rtc_values.months++);
+		 show_time_num(rtc_values.hours, rtc_values.minutes, rtc_values.seconds, rtc_values.date, rtc_values.months, rtc_values.year +2017);
+		  btn_1 = 0;
+	  }
+
+	  //HAL_Delay(1000);
+
+
   }
   /* USER CODE END 3 */
 

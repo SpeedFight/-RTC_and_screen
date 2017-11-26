@@ -69,7 +69,7 @@ void lcd_init()
 
 	lcd_send_command(0x21);
 	lcd_send_command(0x14);
-	lcd_send_command(0x80 | 0x27); //Ustawienie kontrastu
+	lcd_send_command(0x80 | 0x2C); //Ustawienie kontrastu 27
 	lcd_send_command(0x20);
 	lcd_send_command(0x0c);
 }

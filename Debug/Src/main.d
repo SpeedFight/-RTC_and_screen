@@ -32,7 +32,8 @@ Src/main.o: ../Src/main.c \
  D:/Moje/Programowanie/stm32-develop/Blink/Blink/Inc/rtc.h \
  D:/Moje/Programowanie/stm32-develop/Blink/Blink/Inc/i2c.h \
  D:/Moje/Programowanie/stm32-develop/Blink/Blink/Inc/spi.h \
- D:/Moje/Programowanie/stm32-develop/Blink/Blink/Inc/gpio.h
+ D:/Moje/Programowanie/stm32-develop/Blink/Blink/Inc/gpio.h \
+ D:/Moje/Programowanie/stm32-develop/Blink/Blink/Inc/io_routines.h
 
 D:/Moje/Programowanie/stm32-develop/Blink/Blink/Inc/main.h:
 
@@ -101,3 +102,5 @@ D:/Moje/Programowanie/stm32-develop/Blink/Blink/Inc/i2c.h:
 D:/Moje/Programowanie/stm32-develop/Blink/Blink/Inc/spi.h:
 
 D:/Moje/Programowanie/stm32-develop/Blink/Blink/Inc/gpio.h:
+
+D:/Moje/Programowanie/stm32-develop/Blink/Blink/Inc/io_routines.h:

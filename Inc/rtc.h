@@ -40,11 +40,17 @@ typedef struct
 	uint8_t	alarm_control	;
 }rtc_data_t;
 
-void rtc_get(rtc_register reg);
+rtc_data_t rtc_values;
+
 void rtc_set(uint8_t *data,rtc_register reg);
 uint8_t rtc_get_seconds();
 void rtc_get_all_time_registers();
 uint8_t* rtc_get_all_data();
-rtc_data_t rtc_values;
+
+
+void rtc_set_minutes(uint8_t newMinutes);
+void rtc_set_hours(uint8_t newHours);
+void rtc_set_days(uint8_t newDays);
+void rtc_set_months(uint8_t newMonths);
 
 #endif /* RTC_H_ */
