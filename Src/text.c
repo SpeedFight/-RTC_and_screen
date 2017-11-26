@@ -10,6 +10,8 @@
 char row1[9];
 char  row2[11];
 
+const char zeros[11] = {[0 ... 10] = ' '};
+
 void show_time(char* hour, char* minute, char* second, char* day, char* month, char* year)
 {
 
@@ -82,13 +84,41 @@ void show_time_num(uint8_t hour, uint8_t minute, uint8_t second, uint8_t day, ui
 
 	lcd_clear();
 
-	lcd_draw_text(1, 4*3, row1);
-	lcd_draw_text(3, 4*2, row2);
+	lcd_draw_text(1, 5*3, row1);
+	lcd_draw_text(3, 5*2, row2);
 
 	lcd_copy();
 
 }
 
 void update_screen(){
-	show_time_num(rtc_values.hours, rtc_values.minutes, rtc_values.seconds, rtc_values.date, rtc_values.months, rtc_values.year +2017);
+	show_time_num(rtc_values.hours, rtc_values.minutes, rtc_values.seconds, rtc_values.date, rtc_values.months, rtc_values.year + 2017);
+}
+
+void set_pointer(positions pos){
+
+	if(pos == OFF_POS){
+		return;
+	}
+
+	if(pos == HOUR_POS || pos == MINUTE_POS || pos == SEC_POS){
+	lcd_draw_text(2, pos * 5 - 1, "^");
+	} else {
+		lcd_draw_text(4, pos * 5 - 1, "^");
+	}
+
+	lcd_copy();
+}
+
+void clear_pointer(positions pos){
+
+	if(pos == OFF_POS){
+		return;
+	}
+
+	lcd_draw_text(2, 2 * 5, zeros);
+	lcd_draw_text(4, 2 * 5, zeros);
+
+
+	lcd_copy();
 }

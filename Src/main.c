@@ -41,6 +41,7 @@
 #include "stm32f0xx_hal.h"
 #include "i2c.h"
 #include "spi.h"
+#include "tim.h"
 #include "gpio.h"
 #include "io_routines.h"
 
@@ -53,6 +54,9 @@
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 
+uint8_t pointer_pos = HOUR_POS;
+uint8_t mode;
+uint8_t year;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -61,7 +65,6 @@ static void MX_NVIC_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
-
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
@@ -94,6 +97,7 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI1_Init();
   MX_I2C1_Init();
+  MX_TIM14_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
@@ -104,6 +108,8 @@ int main(void)
   lcd_send_data(image, sizeof(image));
   HAL_Delay(200);
   update_screen();
+
+  HAL_TIM_Base_Start_IT(&htim14);
 
 
   /* USER CODE END 2 */
@@ -117,36 +123,48 @@ int main(void)
   /* USER CODE BEGIN 3 */
 
 	  HAL_Delay(200);
-	  if(btn_3){
-			if(++rtc_values.minutes > 59){
-				rtc_values.minutes = 0;
-			}
-		  rtc_set_minutes(rtc_values.minutes);
-		  update_screen();
-		  btn_3 = 0;
 
+	  if(btn_3){
+		  if(++mode > 6){
+			  mode = 0;
+		  }
+
+		  switch (mode) {
+			case 0:
+				pointer_pos = OFF_POS;
+				break;
+			case 1:
+				pointer_pos = HOUR_POS;
+				break;
+			case 2:
+				pointer_pos = MINUTE_POS;
+				break;
+			case 3:
+				pointer_pos = SEC_POS;
+				break;
+			case 4:
+				pointer_pos = DATE_POS;
+				break;
+			case 5:
+				pointer_pos = MONTH_POS;
+				break;
+			case 6:
+				pointer_pos = YEAR_POS;
+				break;
+		}
+
+		  btn_3 = 0;
 	  }
 
 	  if(btn_2){
-			if(++rtc_values.hours > 23){
-				rtc_values.hours = 0;
-			}
-		  rtc_set_hours(rtc_values.hours);
-		  update_screen();
+
 		  btn_2 = 0;
 	  }
 
 	  if(btn_1){
-			if(++rtc_values.months > 12){
-				rtc_values.months = 1;
-			}
-		 rtc_set_months(rtc_values.months);
-		 update_screen();
+
 		 btn_1 = 0;
 	  }
-
-	  //HAL_Delay(1000);
-
 
   }
   /* USER CODE END 3 */
@@ -218,6 +236,9 @@ static void MX_NVIC_Init(void)
   /* EXTI2_3_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(EXTI2_3_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI2_3_IRQn);
+  /* TIM14_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM14_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(TIM14_IRQn);
 }
 
 /* USER CODE BEGIN 4 */

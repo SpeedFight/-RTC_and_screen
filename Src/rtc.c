@@ -87,3 +87,11 @@ void rtc_set_months(uint8_t newMonths)
 	rtc_set(&tmp, RTC_WEEKS_MONTHS_REGISTER);
 }
 
+void rtc_set_years(uint8_t newYears)
+{
+
+	uint8_t tmp = dec_to_BCD(newYears);
+	tmp |= rtc_get(RTC_YEAR_DATE_REGISTER) & ~(0x3F);
+	tmp = tmp << 5;
+	rtc_set(&tmp, RTC_YEAR_DATE_REGISTER);
+}

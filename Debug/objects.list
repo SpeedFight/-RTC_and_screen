@@ -26,4 +26,5 @@
 "Src/stm32f0xx_it.o"
 "Src/system_stm32f0xx.o"
 "Src/text.o"
+"Src/tim.o"
 "startup/startup_stm32f030x6.o"

@@ -15,7 +15,8 @@ C_SRCS += \
 ../Src/stm32f0xx_hal_msp.c \
 ../Src/stm32f0xx_it.c \
 ../Src/system_stm32f0xx.c \
-../Src/text.c 
+../Src/text.c \
+../Src/tim.c 
 
 OBJS += \
 ./Src/font.o \
@@ -29,7 +30,8 @@ OBJS += \
 ./Src/stm32f0xx_hal_msp.o \
 ./Src/stm32f0xx_it.o \
 ./Src/system_stm32f0xx.o \
-./Src/text.o 
+./Src/text.o \
+./Src/tim.o 
 
 C_DEPS += \
 ./Src/font.d \
@@ -43,7 +45,8 @@ C_DEPS += \
 ./Src/stm32f0xx_hal_msp.d \
 ./Src/stm32f0xx_it.d \
 ./Src/system_stm32f0xx.d \
-./Src/text.d 
+./Src/text.d \
+./Src/tim.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

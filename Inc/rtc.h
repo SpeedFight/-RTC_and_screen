@@ -52,5 +52,6 @@ void rtc_set_minutes(uint8_t newMinutes);
 void rtc_set_hours(uint8_t newHours);
 void rtc_set_days(uint8_t newDays);
 void rtc_set_months(uint8_t newMonths);
+void rtc_set_years(uint8_t newYears);
 
 #endif /* RTC_H_ */

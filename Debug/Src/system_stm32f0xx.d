@@ -28,7 +28,9 @@ Src/system_stm32f0xx.o: ../Src/system_stm32f0xx.c \
  D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_pwr.h \
  D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_pwr_ex.h \
  D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_spi.h \
- D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_spi_ex.h
+ D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_spi_ex.h \
+ D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h \
+ D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h
 
 D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h:
 
@@ -89,3 +91,7 @@ D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/STM32F0xx_HAL_Driver/Inc
 D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_spi.h:
 
 D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_spi_ex.h:
+
+D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h:
+
+D:/Moje/Programowanie/stm32-develop/Blink/Blink/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h:
