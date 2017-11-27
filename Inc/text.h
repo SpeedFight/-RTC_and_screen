@@ -17,7 +17,6 @@
 typedef enum{
 	HOUR_POS = 4,
 	MINUTE_POS = 7,
-	SEC_POS = 10,
 
 	DATE_POS = 3,
 	MONTH_POS = 6,

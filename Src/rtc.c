@@ -56,6 +56,9 @@ uint8_t rtc_get(rtc_register reg)
 
 void rtc_set_minutes(uint8_t newMinutes)
 {
+	if(newMinutes > 59){
+		newMinutes = rtc_values.minutes = 0;
+	}
 
 	uint8_t tmp = dec_to_BCD(newMinutes);
 	rtc_set(&tmp, RTC_MINUTES_REGISTER);
@@ -63,6 +66,9 @@ void rtc_set_minutes(uint8_t newMinutes)
 
 void rtc_set_hours(uint8_t newHours)
 {
+	if(newHours > 23){
+		newHours = rtc_values.hours = 0;
+	}
 
 	uint8_t tmp = dec_to_BCD(newHours);
 	tmp |= rtc_get(RTC_HOURS_REGISTER) & ~(0x3F);
@@ -71,8 +77,8 @@ void rtc_set_hours(uint8_t newHours)
 
 void rtc_set_days(uint8_t newDays)
 {
-	if(newDays > 32){
-		newDays = 1;
+	if(newDays > 31 || newDays == 0){
+		newDays = rtc_values.date =1;
 	}
 	uint8_t tmp = dec_to_BCD(newDays);
 	tmp |= rtc_get(RTC_YEAR_DATE_REGISTER) & ~(0x3F);
@@ -81,7 +87,9 @@ void rtc_set_days(uint8_t newDays)
 
 void rtc_set_months(uint8_t newMonths)
 {
-
+	if(newMonths > 12 || newMonths == 0){
+		newMonths = rtc_values.months = 1;
+	}
 	uint8_t tmp = dec_to_BCD(newMonths);
 	tmp |= rtc_get(RTC_WEEKS_MONTHS_REGISTER) & ~(0x1F);
 	rtc_set(&tmp, RTC_WEEKS_MONTHS_REGISTER);
@@ -89,9 +97,41 @@ void rtc_set_months(uint8_t newMonths)
 
 void rtc_set_years(uint8_t newYears)
 {
-
+	rtc_values.year = newYears;
 	uint8_t tmp = dec_to_BCD(newYears);
 	tmp |= rtc_get(RTC_YEAR_DATE_REGISTER) & ~(0x3F);
 	tmp = tmp << 5;
 	rtc_set(&tmp, RTC_YEAR_DATE_REGISTER);
+}
+
+void rtc_inc_hour(){
+	rtc_set_hours(++(rtc_values.hours));
+}
+void rtc_inc_min(){
+	rtc_set_minutes(++(rtc_values.minutes));
+}
+void rtc_inc_day(){
+	rtc_set_days(++(rtc_values.date));
+}
+void rtc_inc_month(){
+	rtc_set_months(++(rtc_values.months));
+}
+void rtc_inc_year(){
+	rtc_set_years(++(rtc_values.year));
+}
+
+void rtc_dec_hour(){
+	rtc_set_hours(--(rtc_values.hours));
+}
+void rtc_dec_min(){
+	rtc_set_minutes(--(rtc_values.minutes));
+}
+void rtc_dec_day(){
+	rtc_set_days(--(rtc_values.date));
+}
+void rtc_dec_month(){
+	rtc_set_months(--(rtc_values.months));
+}
+void rtc_dec_year(){
+	rtc_set_years(--(rtc_values.year));
 }

@@ -101,7 +101,7 @@ void set_pointer(positions pos){
 		return;
 	}
 
-	if(pos == HOUR_POS || pos == MINUTE_POS || pos == SEC_POS){
+	if(pos == HOUR_POS || pos == MINUTE_POS){
 	lcd_draw_text(2, pos * 5 - 1, "^");
 	} else {
 		lcd_draw_text(4, pos * 5 - 1, "^");

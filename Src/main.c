@@ -54,7 +54,7 @@
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 
-uint8_t pointer_pos = HOUR_POS;
+uint8_t pointer_pos = OFF_POS;
 uint8_t mode;
 uint8_t year;
 /* USER CODE END PV */
@@ -111,7 +111,7 @@ int main(void)
 
   HAL_TIM_Base_Start_IT(&htim14);
 
-
+  mode = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -122,47 +122,24 @@ int main(void)
 
   /* USER CODE BEGIN 3 */
 
-	  HAL_Delay(200);
+	  HAL_Delay(300);
 
 	  if(btn_3){
-		  if(++mode > 6){
+		  if(++mode > 5){
 			  mode = 0;
 		  }
-
-		  switch (mode) {
-			case 0:
-				pointer_pos = OFF_POS;
-				break;
-			case 1:
-				pointer_pos = HOUR_POS;
-				break;
-			case 2:
-				pointer_pos = MINUTE_POS;
-				break;
-			case 3:
-				pointer_pos = SEC_POS;
-				break;
-			case 4:
-				pointer_pos = DATE_POS;
-				break;
-			case 5:
-				pointer_pos = MONTH_POS;
-				break;
-			case 6:
-				pointer_pos = YEAR_POS;
-				break;
-		}
+		  pointer_pos = callback_mode[mode].pointer_position;
 
 		  btn_3 = 0;
 	  }
 
 	  if(btn_2){
-
+		  callback_mode[mode].inc_value();
 		  btn_2 = 0;
 	  }
 
 	  if(btn_1){
-
+		 callback_mode[mode].dec_value();
 		 btn_1 = 0;
 	  }
 

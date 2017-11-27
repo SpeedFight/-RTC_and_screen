@@ -10,6 +10,19 @@
 extern TIM_HandleTypeDef htim14;
 extern uint8_t pointer_pos;
 
+void do_nothing(){
+	return;
+}
+
+const mode_routines_t callback_mode[] = {
+		{OFF_POS, do_nothing, do_nothing},
+		{HOUR_POS, rtc_inc_hour, rtc_dec_hour},
+		{MINUTE_POS, rtc_inc_min, rtc_dec_min},
+		{DATE_POS, rtc_inc_day, rtc_dec_day},
+		{MONTH_POS, rtc_inc_month, rtc_dec_month},
+		{YEAR_POS, rtc_inc_year, rtc_dec_year},
+};
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 
 	switch(GPIO_Pin){
@@ -29,15 +42,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 				break;
 
 		case(GPIO_PIN_3):
-
-
 				if(++rtc_values.seconds > 59){
 					rtc_get_all_time_registers();
 				}
 
 		HAL_TIM_Base_Start_IT(&htim14);
 
-		//update_screen();
+		update_screen();
 		set_pointer(pointer_pos);
 				break;
 	}
@@ -46,46 +57,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
 	clear_pointer(pointer_pos);
-}
-
-void increment_minutes(){
-	if(++rtc_values.minutes > 59){
-		rtc_values.minutes = 0;
-	}
-  rtc_set_minutes(rtc_values.minutes);
-  update_screen();
-}
-
-void increment_hours(){
-	if(++rtc_values.hours > 23){
-		rtc_values.hours = 0;
-	}
-  rtc_set_hours(rtc_values.hours);
-  update_screen();
-}
-
-void increment_days(){
-	if(++rtc_values.date > 31){
-		rtc_values.date = 1;
-	}
- rtc_set_days(rtc_values.date);
- update_screen();
-}
-
-void increment_months(){
-	if(++rtc_values.months > 12){
-		rtc_values.months = 1;
-	}
- rtc_set_months(rtc_values.months);
- update_screen();
-}
-
-void increment_years(){
-	if(++rtc_values.year > 12){
-		rtc_values.year = 1;
-	}
- rtc_set_years(rtc_values.year);
- update_screen();
 }
 
 

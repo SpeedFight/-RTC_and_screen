@@ -26,4 +26,12 @@ void increment_days();
 void increment_months();
 void increment_years();
 
+typedef struct{
+	positions pointer_position; //blinking cursor under value to change
+	void (*inc_value)(void);
+	void (*dec_value)(void);
+}mode_routines_t;
+
+extern const mode_routines_t callback_mode[];
+
 #endif /* IO_ROUTINES_H_ */

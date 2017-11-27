@@ -54,4 +54,18 @@ void rtc_set_days(uint8_t newDays);
 void rtc_set_months(uint8_t newMonths);
 void rtc_set_years(uint8_t newYears);
 
+void rtc_inc_hour();
+void rtc_inc_min();
+void rtc_inc_day();
+void rtc_inc_month();
+void rtc_inc_year();
+
+void rtc_dec_hour();
+void rtc_dec_min();
+void rtc_dec_day();
+void rtc_dec_month();
+void rtc_dec_year();
+
+
+
 #endif /* RTC_H_ */
